@@ -53,3 +53,4 @@ What you should learn from this project:
 
 ## Author
 * **Matthew Feliciano** - [Mfeliciano778](https://github.com/Mfeliciano778)
+* **William Colindres** - [Wcolindr](https://github.com/wcolindr)
