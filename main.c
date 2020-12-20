@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
     FILE *fptr;
     char buff[50];
-    char *last_tok;
+    char *last_tok, *num_tok;
 
     if (argc != 2)
     {
@@ -29,6 +29,10 @@ int main(int argc, char *argv[])
         last_tok = strtok(buff, " ");
         /*is_comm(last_tok);*/
         printf("%s\n", last_tok);
+	num_tok = strtok(NULL, " ");
+
+	if ((num_tok != NULL))
+	    printf("%s\n", last_tok);
     }
     fclose(fptr);
     return (1);
