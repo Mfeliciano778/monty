@@ -9,9 +9,11 @@
  */
 int main(int argc, char *argv[])
 {
+    int line;
     FILE *fptr;
-    char buff[50];
-    char *last_tok;
+    char *buff = NULL, *l_tok;
+    size_t i = 100;
+    unsigned int line_num = 1;
 
     if (argc != 2)
     {
@@ -24,17 +26,23 @@ int main(int argc, char *argv[])
         printf("Error: Can't open file <file>\n");
         exit(EXIT_FAILURE);
     }
-    while (fgets(buff, 50, fptr) != NULL)
+    while ((line = getline(&buff, &i, fptr)) != -1)
     {
-        last_tok = strtok(buff, " ");
-        /*is_comm(last_tok);*/
-        printf("%s\n", last_tok);
+        if (line != -1)
+        {
+            l_tok = strtok(buff, " \n\t");
+            is_comm(l_tok);
+            printf("%s\n", l_tok);
+            line_num++;
+        }
     }
     fclose(fptr);
+    free(buff);
+
     return (1);
 }
 
-/*void (*is_comm(char *last_tok))
+/*int (*is_comm(char *last_tok))
 {
     instruction_t commands[] = {
 		{"push", push},
