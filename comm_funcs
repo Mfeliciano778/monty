@@ -1,0 +1,31 @@
+#include "lists.h"
+
+int push(stack_t **head, int line_num)
+{
+    printf("push");
+    return (1);
+}
+
+int pall(stack_t **head, int line_num)
+{
+    printf("pall");
+    return (1);
+}
+
+int pint(stack_t **head, int line_num)
+{
+    printf("pint");
+    return (1);
+}
+
+int pop(stack_t **head, int line_num)
+{
+    printf("pop");
+    return (1);
+}
+
+int swap(stack_t **head, int line_num)
+{
+    printf("swap");
+    return (1);
+}
