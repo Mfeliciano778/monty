@@ -4,7 +4,7 @@
  * on a unique stack with specific instructions to manipulate it.
  * @argc: the amount of  arguments
  * @argv: the arguments when calling this function
- * 
+ *
  * Return 0 if fail, 1 if success
  */
 int main(int argc, char *argv[])
