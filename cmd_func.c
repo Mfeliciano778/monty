@@ -3,20 +3,29 @@
 void push(stack_t **stack, unsigned int line_number)
 {
     char *opcode_num;
-    int num;
+    int num, i, num_len;
 
 
     opcode_num = strtok(NULL, " \n\t");
-    if (!opcode_num)
+    if (opcode_num == NULL)
     {
         dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
     }
-    /*if (isdigit(opcode_num) == 0)
+    num_len = strlen(opcode_num);
+    for(i = 0; i < num_len; i++)
     {
-        dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-    }*/
+        if(isdigit(opcode_num[i]) == 0)
+        {
+            dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_num);
+		    exit(EXIT_FAILURE);
+        }
+        else
+        {
+            break;
+        }
+        
+    }
     num = atoi(opcode_num);
     add_dnode_int_end(stack, num);
 }
