@@ -9,12 +9,15 @@
  */
 int main(int argc, char *argv[])
 {
+    stack_t *stack;
     int line;
     FILE *fptr;
     char *buff = NULL, *l_tok;
     size_t i = 100;
     unsigned int line_num = 1;
+    void (*f)(stack_t **, unsigned int);
 
+    stack = NULL;
     if (argc != 2)
     {
         printf("USAGE: monty file\n");
@@ -31,41 +34,14 @@ int main(int argc, char *argv[])
         if (line != -1)
         {
             l_tok = strtok(buff, " \n\t");
-            is_comm(l_tok);
-            printf("%s\n", l_tok);
+            f = is_comm(l_tok);
+            if (f != NULL)
+                f(&stack, line_num);
             line_num++;
         }
     }
     fclose(fptr);
     free(buff);
-
+    free(stack);
     return (1);
 }
-
-/*int (*is_comm(char *last_tok))
-{
-    instruction_t commands[] = {
-    {"push", push},
-    {"pall", pall},
-        {"pint", pint},
-        {"pop", pop},
-        {"swap", swap},
-        {"add", add},
-        {"nop", nop},
-        {"NULL", NULL}
-    };
-    int index;
-
-    if (last_tok == NULL)
-        return NULL;
-    for (index = 0; index < 8; index++)
-    {
-        if (strcmp(((commands + index))->opcode, last_tok) == 0)
-        {
-            return ((commands + index)->f);
-        }
-    }
-    printf("Uknown instruction: %s\n", last_tok);
-    exit(EXIT_FAILURE);
-    return (NULL);
-    }*/
