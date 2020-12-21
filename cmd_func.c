@@ -7,12 +7,12 @@ void push(stack_t **stack, unsigned int line_number)
 
 
     opcode_num = strtok(NULL, " \n\t");
-    num_len = strlen(opcode_num);
     if (opcode_num == NULL)
     {
         dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
     }
+    num_len = strlen(opcode_num);
     for(i = 0; i < num_len; i++)
     {
         if(isdigit(opcode_num[i]) == 0)
