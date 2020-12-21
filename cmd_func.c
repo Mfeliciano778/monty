@@ -7,16 +7,11 @@ void push(stack_t **stack, unsigned int line_number)
 
 
     opcode_num = strtok(NULL, " \n\t");
-    if (!opcode_num)
+    if (opcode_num == NULL)
     {
         dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
     }
-    /*if (isdigit(opcode_num) == 0)
-    {
-        dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-    }*/
     num = atoi(opcode_num);
     add_dnode_int_end(stack, num);
 }
