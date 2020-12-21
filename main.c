@@ -4,7 +4,7 @@
  * on a unique stack with specific instructions to manipulate it.
  * @argc: the amount of  arguments
  * @argv: the arguments when calling this function
- * 
+ *
  * Return 0 if fail, 1 if success
  */
 int main(int argc, char *argv[])
@@ -45,8 +45,8 @@ int main(int argc, char *argv[])
 /*int (*is_comm(char *last_tok))
 {
     instruction_t commands[] = {
-		{"push", push},
-		{"pall", pall},
+    {"push", push},
+    {"pall", pall},
         {"pint", pint},
         {"pop", pop},
         {"swap", swap},
@@ -68,4 +68,4 @@ int main(int argc, char *argv[])
     printf("Uknown instruction: %s\n", last_tok);
     exit(EXIT_FAILURE);
     return (NULL);
-}*/
+    }*/
