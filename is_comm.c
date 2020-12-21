@@ -18,6 +18,10 @@ void (*is_comm(char *op_code))(stack_t **stack, unsigned int line_number)
         {"NULL", NULL}
     };
     int index;
+    unsigned int line = line_num;
+
+    if (op_code == NULL || op_code[0] == '#')
+        return (NULL);
 
     for (index = 0; index < 8; index++)
     {
@@ -26,7 +30,7 @@ void (*is_comm(char *op_code))(stack_t **stack, unsigned int line_number)
             return (cmds[index].f);
         }
     }
-    printf("Uknown instruction: %s\n", op_code);
-    exit(EXIT_FAILURE);
-    return (NULL);
+    dprintf(STDERR_FILENO, "L%i: unknown instruction %s\n", line,
+        op_code);
+	exit(EXIT_FAILURE);
 }
