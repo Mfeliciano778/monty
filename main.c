@@ -1,4 +1,4 @@
-#include "lists.h"
+#include "monty.h"
 
 unsigned int line_num = 1;
 /**
@@ -11,38 +11,59 @@ unsigned int line_num = 1;
  */
 int main(int argc, char *argv[])
 {
-    stack_t *stack;
-    int line;
-    FILE *fptr;
-    char *buff = NULL, *l_tok;
-    size_t i = 100;
-    void (*f)(stack_t **, unsigned int);
+	stack_t *stack;
+	int line;
+	FILE *fptr;
+	char *buff = NULL, *l_tok;
+	size_t i = 0;
+	void (*f)(stack_t **, unsigned int);
 
-    stack = NULL;
-    if (argc != 2)
-    {
-        dprintf(STDERR_FILENO, "USAGE: monty file\n");
+	stack = NULL;
+	if (argc != 2)
+	{
+		dprintf(STDERR_FILENO, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
-    }
-    fptr = fopen(argv[1], "r");
-    if (fptr == NULL)
-    {
-        dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
+	}
+	fptr = fopen(argv[1], "r");
+	if (fptr == NULL)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
-    }
-    while ((line = getline(&buff, &i, fptr)) != -1)
-    {
-        if (line != -1)
-        {
-            l_tok = strtok(buff, " \n\t");
-            f = is_comm(l_tok);
-            if (f)
-                f(&stack, line_num);
-            line_num++;
-        }
-    }
-    fclose(fptr);
-    free(buff);
-    free(stack);
-    return (1);
+	}
+	while ((line = getline(&buff, &i, fptr)) != -1)
+	{
+		if (line != -1)
+		{
+			l_tok = strtok(buff, " \n\t\v\r\a");
+			f = is_comm(l_tok);
+			if (f)
+				f(&stack, line_num);
+			line_num++;
+		}
+	}
+	fclose(fptr);
+	free(buff);
+	free_stack(&stack);
+	return (1);
+}
+/**
+ * free_stack - frees the stack on failure
+ * @stack: pointer to the head of the stack
+ *
+ * Return: Nothing
+ */
+void free_stack(stack_t **stack)
+{
+	if ((*stack) == NULL || stack == NULL)
+		return;
+	else if ((*stack)->next == NULL)
+	{
+		free((*stack));
+	}
+	else
+	{
+		free_stack(&((*stack)->next));
+		free((*stack));
+	}
+
 }

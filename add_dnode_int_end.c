@@ -1,4 +1,4 @@
-#include "lists.h"
+#include "monty.h"
 /**
 * add_dnode_int_end - adds node to end of list
 * @head: the head node
@@ -22,6 +22,6 @@ void *add_dnode_int_end(stack_t **head, int n)
 	if ((*head) != NULL)
 		(*head) = new_n;
 	else
-        (*head) = new_n;
+		(*head) = new_n;
 	return (new_n);
 }

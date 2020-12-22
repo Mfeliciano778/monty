@@ -1,5 +1,5 @@
-#ifndef LISTS_H
-#define LISTS_H
+#ifndef MONTY_H
+#define MONTY_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,6 +39,8 @@ typedef struct instruction_s
 
 extern unsigned int line_num;
 
+void mem_free(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t **stack);
 void (*is_comm(char *op_code))(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
