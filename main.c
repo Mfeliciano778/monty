@@ -1,6 +1,6 @@
 #include "monty.h"
 
-unsigned int line_num = 1;
+unsigned int line_number = 1;
 /**
  * main - function that builds an interpreter for monty bytecode and relies
  * on a unique stack with specific instructions to manipulate it.
@@ -37,8 +37,8 @@ int main(int argc, char *argv[])
 			l_tok = strtok(buff, " \n\t\v\r\a");
 			f = is_comm(l_tok);
 			if (f)
-				f(&stack, line_num);
-			line_num++;
+				f(&stack, line_number);
+			line_number++;
 		}
 	}
 	fclose(fptr);

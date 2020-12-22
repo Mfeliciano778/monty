@@ -18,7 +18,7 @@ void (*is_comm(char *op_code))(stack_t **stack, unsigned int line_number)
 		{NULL, mem_free}
 	};
 	int index;
-	unsigned int line = line_num;
+	unsigned int line = line_number;
 
 	if (op_code == NULL || op_code[0] == '#')
 		return (NULL);
@@ -46,6 +46,6 @@ void mem_free(stack_t **stack, unsigned int line_number)
 	(void) line_number;
 	free_stack(stack);
 	dprintf(STDERR_FILENO, "L%i: unknown instruction\n",
-		line_num);
+		line_number);
 	exit(EXIT_FAILURE);
 }
