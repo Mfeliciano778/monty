@@ -7,7 +7,7 @@ unsigned int line_num = 1;
  * @argc: the amount of  arguments
  * @argv: the arguments when calling this function
  *
- * Return 0 if fail, 1 if success
+ * Return: 0 if fail, 1 if success
  */
 int main(int argc, char *argv[])
 {
