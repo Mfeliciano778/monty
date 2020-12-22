@@ -60,9 +60,23 @@ void pint(stack_t **stack, unsigned int line_number)
 
 void pop(stack_t **stack, unsigned int line_number)
 {
-    (*stack) = NULL;
-    line_number++;
-    printf("pop");
+	stack_t *curr;
+
+	if ((*stack) == NULL)
+	{
+		dprintf(STDERR_FILENO, "L%u: can't pop an empty stack\n", line_number);
+			exit(EXIT_FAILURE);
+	}
+
+        curr = (*stack);
+	(*stack) = curr->next;
+	free(curr);
+
+	if ((*stack) != NULL)
+	{
+		(*stack)->prev = NULL;
+
+	}
 }
 
 void swap(stack_t **stack, unsigned int line_number)
