@@ -34,9 +34,9 @@ void pall(stack_t **stack, unsigned int line_number)
 {
     stack_t *curr;
 
-    curr = (*stack);
     if ((*stack) == NULL || stack == NULL)
         return;
+    curr = (*stack);
     while(curr)
     {
         printf("%d\n", curr->n);
