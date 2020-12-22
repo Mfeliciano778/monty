@@ -14,6 +14,7 @@ void *add_dnode_int_end(stack_t **head, int n)
 	if (!new_n)
 	{
 		dprintf(STDERR_FILENO, "malloc failed\n");
+		free_stack(head);
 		exit(EXIT_FAILURE);
 	}
 	new_n->n = n;

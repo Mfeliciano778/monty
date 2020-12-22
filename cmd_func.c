@@ -16,6 +16,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (opcode_num == NULL)
 	{
 		dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_number);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	num_len = strlen(opcode_num);
@@ -24,6 +25,7 @@ void push(stack_t **stack, unsigned int line_number)
 		if (isdigit(opcode_num[i]) == 0)
 		{
 			dprintf(STDERR_FILENO, "L%d: usage: push integer\n", line_number);
+			free_stack(stack);
 			exit(EXIT_FAILURE);
 		}
 		else
@@ -70,6 +72,7 @@ void pint(stack_t **stack, unsigned int line_number)
 	if ((*stack) == NULL || stack == NULL)
 	{
 		dprintf(STDERR_FILENO, "L%u: can't pint, stack empty\n", line_number);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", curr->n);
@@ -88,7 +91,8 @@ void pop(stack_t **stack, unsigned int line_number)
 	if ((*stack) == NULL)
 	{
 		dprintf(STDERR_FILENO, "L%u: can't pop an empty stack\n", line_number);
-			exit(EXIT_FAILURE);
+		free_stack(stack);
+		exit(EXIT_FAILURE);
 	}
 
 		curr = (*stack);
@@ -111,42 +115,39 @@ void pop(stack_t **stack, unsigned int line_number)
 void swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *curr;
-        stack_t *tmp;
+	stack_t *tmp;
 
-        if ((*stack) == NULL || stack == NULL)
-        {
-                dprintf(STDERR_FILENO, "L%u: can't swap, stack too short\n", line_number);
-                exit(EXIT_FAILURE);
-        }
-
-        curr = (*stack);
-        tmp = curr->next;
-
-	if (tmp)
+	if ((*stack) == NULL || stack == NULL)
 	{
-		if (tmp->next)
-		{
+		dprintf(STDERR_FILENO, "L%u: can't swap, stack too short\n",
+			line_number);
+		free_stack(stack);
+		exit(EXIT_FAILURE);
+	}
+	curr = (*stack);
+	tmp = curr->next;
+	if (!tmp)
+	{
+		dprintf(STDERR_FILENO, "L%u: can't swap, stack too short\n",
+			line_number);
+		free_stack(stack);
+		exit(EXIT_FAILURE);
+	}
+	if (tmp->next)
+	{
 		curr->next = tmp->next;
 		tmp->next->prev = curr;
 		curr->prev = tmp;
 		tmp->prev = NULL;
 		tmp->next = curr;
 		(*stack) = tmp;
-		}
-
-		else
-		{
-			curr->next = NULL;
-			curr->prev = tmp;
-			tmp->prev = NULL;
-			tmp->next = curr;
-			(*stack) = tmp;
-		}
 	}
-
 	else
 	{
-		dprintf(STDERR_FILENO, "L%u: can't swap, stack too short\n", line_number);
-                exit(EXIT_FAILURE);
+		curr->next = NULL;
+		curr->prev = tmp;
+		tmp->prev = NULL;
+		tmp->next = curr;
+		(*stack) = tmp;
 	}
 }
