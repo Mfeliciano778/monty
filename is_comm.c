@@ -48,4 +48,7 @@ void mem_free(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
 	free_stack(stack);
+
+	dprintf(STDERR_FILENO, "L%i: unknown instruction\n", line_number);
+	exit(EXIT_FAILURE);
 }
