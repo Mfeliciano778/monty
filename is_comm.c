@@ -23,6 +23,9 @@ void (*is_comm(char *op_code))(stack_t **stack, unsigned int line_number)
 	};
 	int index;
 
+	if (op_code[0] == '#')
+		return (NULL);
+
 	if (op_code == NULL || op_code[0] == '#')
 		return (NULL);
 
